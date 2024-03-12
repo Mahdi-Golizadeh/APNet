@@ -70,6 +70,8 @@ def main():
     if output_dir and not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
+    logger = setup_logger("reid_baseline", output_dir, 0)
+    logger.info("Running with config:\n{}".format())
     cudnn.benchmark = True
     train()
 
