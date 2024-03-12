@@ -50,7 +50,7 @@ DATASETS_NAMES = ('dukemtmc') #select from "dukemtmc", "market1501" and "msmt17"
 # DataLoader
 # -----------------------------------------------------------------------------
 # Number of data loading threads
-DATALOADER_NUM_WORKERS = 8
+DATALOADER_NUM_WORKERS = 4
 # Sampler for data loading
 DATALOADER_SAMPLER = 'softmax_triplet'
 # Number of instance for one batch
@@ -96,7 +96,7 @@ SOLVER_FINETUNE = False
 # Number of images per batch
 # This is global, so if we have 8 GPUs and IMS_PER_BATCH = 16, each GPU will
 # see 2 images per batch
-SOLVER_IMS_PER_BATCH = 80
+SOLVER_IMS_PER_BATCH = 64
 
 # This is global, so if we have 8 GPUs and IMS_PER_BATCH = 16, each GPU will
 # see 2 images per batch
