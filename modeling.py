@@ -623,7 +623,7 @@ class GlobalAvgPool2d(nn.Module):
     def forward(self, inputs):
         return nn.functional.adaptive_avg_pool2d(inputs, 1).view(inputs.size(0), -1)
 
-class Bottleneck(nn.Module):
+class Bottleneck_(nn.Module):
     """ResNet Bottleneck
     """
     # pylint: disable=unused-argument
@@ -633,7 +633,7 @@ class Bottleneck(nn.Module):
                  avd=False, avd_first=False, dilation=1, is_first=False,
                  rectified_conv=False, rectify_avg=False,
                  norm_layer=None, dropblock_prob=0.0, last_gamma=False, drop_connection_rate=0.0):
-        super(Bottleneck, self).__init__()
+        super(Bottleneck_, self).__init__()
         group_width = int(planes * (bottleneck_width / 64.)) * cardinality
         self.conv1 = nn.Conv2d(inplanes, group_width, kernel_size=1, bias=False)
         self.bn1 = norm_layer(group_width)
@@ -934,7 +934,7 @@ class ResNet_(nn.Module):
         return x4, x3, x2
 
 def resnest50(pretrained=False, root='~/.encoding/models', **kwargs):
-    model = ResNet_(Bottleneck, [3, 4, 6, 3],
+    model = ResNet_(Bottleneck_, [3, 4, 6, 3],
                    radix=2, groups=1, bottleneck_width=64,
                    deep_stem=True, stem_width=32, avg_down=True,
                    avd=True, avd_first=False, **kwargs)
@@ -944,7 +944,7 @@ def resnest50(pretrained=False, root='~/.encoding/models', **kwargs):
     return model
 
 def resnest101(pretrained=False, root='~/.encoding/models', **kwargs):
-    model = ResNet_(Bottleneck, [3, 4, 23, 3],
+    model = ResNet_(Bottleneck_, [3, 4, 23, 3],
                    radix=2, groups=1, bottleneck_width=64,
                    deep_stem=True, stem_width=64, avg_down=True,
                    avd=True, avd_first=False, **kwargs)
@@ -954,7 +954,7 @@ def resnest101(pretrained=False, root='~/.encoding/models', **kwargs):
     return model
 
 def resnest200(pretrained=False, from_moco=False, root='~/.encoding/models', **kwargs):
-    model = ResNet_(Bottleneck, [3, 24, 36, 3],
+    model = ResNet_(Bottleneck_, [3, 24, 36, 3],
                    radix=2, groups=1, bottleneck_width=64,
                    deep_stem=True, stem_width=64, avg_down=True,
                    avd=True, avd_first=False, **kwargs)
@@ -982,7 +982,7 @@ def resnest200(pretrained=False, from_moco=False, root='~/.encoding/models', **k
     return model
 
 def resnest269(pretrained=False,from_moco=False, root='~/.encoding/models', **kwargs):
-    model = ResNet_(Bottleneck, [3, 30, 48, 8],
+    model = ResNet_(Bottleneck_, [3, 30, 48, 8],
                    radix=2, groups=1, bottleneck_width=64,
                    deep_stem=True, stem_width=64, avg_down=True,
                    avd=True, avd_first=False, **kwargs)
