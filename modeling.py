@@ -728,7 +728,7 @@ class Bottleneck(nn.Module):
 
         return out
 
-class ResNet(nn.Module):
+class ResNet_(nn.Module):
     """ResNet Variants
 
     Parameters
@@ -773,7 +773,7 @@ class ResNet(nn.Module):
 
         self.global_drop_connect_rate = 0.0
 
-        super(ResNet, self).__init__()
+        super(ResNet_, self).__init__()
         self.rectified_conv = rectified_conv
         self.rectify_avg = rectify_avg
         if rectified_conv:
@@ -934,7 +934,7 @@ class ResNet(nn.Module):
         return x4, x3, x2
 
 def resnest50(pretrained=False, root='~/.encoding/models', **kwargs):
-    model = ResNet(Bottleneck, [3, 4, 6, 3],
+    model = ResNet_(Bottleneck, [3, 4, 6, 3],
                    radix=2, groups=1, bottleneck_width=64,
                    deep_stem=True, stem_width=32, avg_down=True,
                    avd=True, avd_first=False, **kwargs)
@@ -944,7 +944,7 @@ def resnest50(pretrained=False, root='~/.encoding/models', **kwargs):
     return model
 
 def resnest101(pretrained=False, root='~/.encoding/models', **kwargs):
-    model = ResNet(Bottleneck, [3, 4, 23, 3],
+    model = ResNet_(Bottleneck, [3, 4, 23, 3],
                    radix=2, groups=1, bottleneck_width=64,
                    deep_stem=True, stem_width=64, avg_down=True,
                    avd=True, avd_first=False, **kwargs)
@@ -954,7 +954,7 @@ def resnest101(pretrained=False, root='~/.encoding/models', **kwargs):
     return model
 
 def resnest200(pretrained=False, from_moco=False, root='~/.encoding/models', **kwargs):
-    model = ResNet(Bottleneck, [3, 24, 36, 3],
+    model = ResNet_(Bottleneck, [3, 24, 36, 3],
                    radix=2, groups=1, bottleneck_width=64,
                    deep_stem=True, stem_width=64, avg_down=True,
                    avd=True, avd_first=False, **kwargs)
@@ -982,7 +982,7 @@ def resnest200(pretrained=False, from_moco=False, root='~/.encoding/models', **k
     return model
 
 def resnest269(pretrained=False,from_moco=False, root='~/.encoding/models', **kwargs):
-    model = ResNet(Bottleneck, [3, 30, 48, 8],
+    model = ResNet_(Bottleneck, [3, 30, 48, 8],
                    radix=2, groups=1, bottleneck_width=64,
                    deep_stem=True, stem_width=64, avg_down=True,
                    avd=True, avd_first=False, **kwargs)
