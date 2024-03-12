@@ -71,7 +71,7 @@ def main():
         os.makedirs(output_dir)
 
     logger = setup_logger("reid_baseline", output_dir, 0)
-    logger.info("Running with config:\n{}".format())
+    logger.info("training")
     cudnn.benchmark = True
     train()
 
