@@ -11,7 +11,7 @@
 
 """Split-Attention"""
 
-from config import *
+from configs import *
 import torch
 import sys
 from torch import nn
