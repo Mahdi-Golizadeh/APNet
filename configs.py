@@ -14,6 +14,7 @@
 MODEL_DEVICE = "cuda:0"
 MODEL_NAME = 'resnet50' # 'resnet50' 'seresnet50' 'densenet196'
 MODEL_LAST_STRIDE = 1
+MODEL_PRETRAIN_CHOICE = "imagenet" # imagenet for imagenet checkpoint and self for resume training
 #ResNet50 Pretrained Model Path, eg "/home/gutianpei/.cache/torch/hub/checkpoints/resnet50-19c8e357.pth"
 MODEL_PRETRAIN_PATH = 'resnet50-0676ba61.pth'
 MODEL_PRETRAIN_PATH_SE = ''

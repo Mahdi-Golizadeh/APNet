@@ -37,9 +37,10 @@ def train():
 
     # prepare model
     model = build_model(num_classes)
-    if SOLVER_FINETUNE:
-        model.load_state_dict(torch.load(TEST_WEIGHT).module.state_dict())
-    model = nn.DataParallel(model)
+
+    # if SOLVER_FINETUNE:
+    #     model.load_state_dict(torch.load(TEST_WEIGHT).module.state_dict())
+    # model = nn.DataParallel(model)
 
 
     optimizer = make_optimizer(model)
@@ -49,7 +50,19 @@ def train():
     #                               SOLVER_WARMUP_ITERS, SOLVER_WARMUP_METHOD)
 
     loss_func = make_loss()
-
+    if MODEL_PRETRAIN_CHOICE == 'self':
+        start_epoch = eval(MODEL_PRETRAIN_PATH.split('/')[-1].split('.')[0].split('_')[-1])
+        print('Start epoch:', start_epoch)
+        path_to_optimizer = MODEL_PRETRAIN_PATH.replace('model', 'optimizer')
+        print('Path to the checkpoint of optimizer:', path_to_optimizer)
+        model.load_state_dict(torch.load(MODEL_PRETRAIN_PATH)["model"])
+        model.to(MODEL_DEVICE)
+        optimizer.load_state_dict(torch.load(path_to_optimizer)["optimizer"])
+        # optimizer.to(MODEL_DEVICE)
+        scheduler = WarmupMultiStepLR(optimizer, SOLVER_STEPS, 
+                                        SOLVER_GAMMA, SOLVER_WARMUP_FACTOR,
+                                        SOLVER_WARMUP_ITERS, SOLVER_WARMUP_METHOD, start_epoch)
+    
     arguments = {}
 
     do_train(
