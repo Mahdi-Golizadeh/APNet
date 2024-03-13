@@ -507,7 +507,7 @@ class ResNet(nn.Module):
         return x
 
     def load_param(self, model_path):
-        param_dict = torch.load(model_path)
+        param_dict = torch.load("resnet50-0676ba61.pth")
         for i in param_dict:
             if 'fc' in i:
                 continue
